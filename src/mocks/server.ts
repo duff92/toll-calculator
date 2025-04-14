@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { createServer, Model, Response } from "miragejs";
 
 import { nanoid } from "./nanoid";
@@ -105,7 +106,8 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       // Seed with sample passages
-      const today = new Date().toISOString().split("T")[0];
+      const today = dayjs().toISOString().split("T")[0];
+      const yesterday = dayjs().subtract(1, "day").toISOString().split("T")[0];
 
       // Sample car passages during different times
       server.create("passage", {
@@ -128,6 +130,30 @@ export function makeServer({ environment = "development" } = {}) {
         id: nanoid(),
         vehicleId: "1",
         timestamp: `${today}T16:30:00.000Z`,
+        location: "South Entrance",
+        fee: 18,
+      });
+
+      server.create("passage", {
+        id: nanoid(),
+        vehicleId: "1",
+        timestamp: `${yesterday}T07:15:00.000Z`,
+        location: "North Entrance",
+        fee: 18,
+      });
+
+      server.create("passage", {
+        id: nanoid(),
+        vehicleId: "1",
+        timestamp: `${yesterday}T08:45:00.000Z`,
+        location: "East Entrance",
+        fee: 8,
+      });
+
+      server.create("passage", {
+        id: nanoid(),
+        vehicleId: "1",
+        timestamp: `${yesterday}T16:30:00.000Z`,
         location: "South Entrance",
         fee: 18,
       });
@@ -248,7 +274,13 @@ export function makeServer({ environment = "development" } = {}) {
         "/passages",
         (
           schema,
-          request: { queryParams: { date?: string; vehicleId?: string } }
+          request: {
+            queryParams: {
+              date?: string;
+              numberOfDays?: string;
+              vehicleId?: string;
+            };
+          }
         ) => {
           const { date, vehicleId } = request.queryParams;
           let passages = schema.all("passage").models;
@@ -258,12 +290,24 @@ export function makeServer({ environment = "development" } = {}) {
             const dateStart = new Date(date);
             dateStart.setHours(0, 0, 0, 0);
             const dateEnd = new Date(date);
+            if (request.queryParams.numberOfDays) {
+              const days = Number(request.queryParams.numberOfDays);
+              if (days > 30) {
+                dateEnd.setMonth(dateEnd.getMonth() + Math.floor(days / 30));
+                dateEnd.setDate(dateEnd.getDate() + (days % 30));
+              } else {
+                dateEnd.setDate(dateEnd.getDate() + days);
+              }
+            }
             dateEnd.setHours(23, 59, 59, 999);
             passages = passages.filter((passage) => {
               const passageDate = new Date(
                 (passage.attrs as TollPassage).timestamp
               );
-              return passageDate >= dateStart && passageDate <= dateEnd;
+              return (
+                dayjs(passageDate).isBefore(dayjs(dateEnd)) &&
+                dayjs(passageDate).isAfter(dayjs(dateStart))
+              );
             });
           }
 
