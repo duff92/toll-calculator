@@ -1,9 +1,12 @@
-import { Box, Container, Typography, Alert } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
+
 
 import RegNumberInput from "../components/RegNumberInput";
 import TollCalculator from "../components/TollCalculator";
+import VehicleInformation from "../components/VehicleInformation";
 import { useTollCalculation } from "../hooks/useTollCalculation";
 import { useVehicle } from "../hooks/useVehicle";
+
 
 const TollsPage = () => {
   const {
@@ -28,7 +31,7 @@ const TollsPage = () => {
   } = useTollCalculation();
 
   return (
-    <Container maxWidth="sm" component="main">
+    <Container maxWidth="md" component="main">
       <Box sx={{ my: 4 }}>
         <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
           Toll Calculator
@@ -43,9 +46,7 @@ const TollsPage = () => {
         />
 
         {vehicle && (
-          <Alert severity="success" sx={{ mt: 2, mb: 2 }}>
-            Vehicle found: {vehicle.make} {vehicle.model}  ({vehicle.type})
-          </Alert>
+          <VehicleInformation vehicle={vehicle} />
         )}
 
         <TollCalculator
