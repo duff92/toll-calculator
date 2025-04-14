@@ -29,10 +29,8 @@ export default function App() {
     <Container maxWidth="sm">
       <Box sx={{ my: 4 }}>
         <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
-          Material UI Vite.js example in TypeScript
+          Toll Calculator
         </Typography>
-        <ProTip />
-        <Copyright />
         <TollCalculator />
       </Box>
     </Container>
