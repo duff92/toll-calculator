@@ -4,39 +4,60 @@ import {
   MenuItem,
   Box,
   Alert,
-} from '@mui/material';
-import { useState } from 'react';
+  CircularProgress,
+} from "@mui/material";
+import { useState } from "react";
 
 const vehicleTypes = [
-  'Car',
-  'Motorbike',
-  'Emergency',
-  'Diplomat',
-  'Bus',
-  'Truck',
+  "Car",
+  "Motorbike",
+  "Emergency",
+  "Diplomat",
+  "Bus",
+  "Truck",
 ];
 
-const freeVehicles = ['Motorbike', 'Emergency', 'Diplomat', 'Bus'];
-
 const TollCalculator = () => {
-  const [vehicleType, setVehicleType] = useState('');
-  const [timestamp, setTimestamp] = useState('');
+  const [vehicleType, setVehicleType] = useState("");
+  const [timestamp, setTimestamp] = useState("");
   const [fee, setFee] = useState<number | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [reason, setReason] = useState<string | null>(null);
 
-  const handleCalculate = () => {
-    if (freeVehicles.includes(vehicleType)) {
-      setFee(0);
-      return;
+  const handleCalculate = async () => {
+    setLoading(true);
+    setError(null);
+    setReason(null);
+
+    try {
+      // Format timestamp to ISO string if needed
+      const formattedTimestamp = new Date(timestamp).toISOString();
+
+      const response = await fetch("/api/calculate-toll", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          vehicleType,
+          timestamp: formattedTimestamp,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to calculate toll fee");
+      }
+
+      const data = await response.json();
+      setFee(data.fee);
+      setReason(data.reason);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An error occurred");
+      setFee(null);
+    } finally {
+      setLoading(false);
     }
-
-    // Mock logic — replace with real API logic later
-    const hour = new Date(timestamp).getHours();
-    let calculatedFee = 8;
-    if (hour >= 7 && hour < 9) calculatedFee = 18;
-    else if (hour >= 6 && hour < 7) calculatedFee = 13;
-    else if (hour >= 16 && hour < 18) calculatedFee = 18;
-
-    setFee(calculatedFee);
   };
 
   return (
@@ -48,11 +69,11 @@ const TollCalculator = () => {
         value={vehicleType}
         onChange={(e) => setVehicleType(e.target.value)}
         margin="normal"
-        inputProps={{ 'aria-label': 'vehicle type' }}
+        inputProps={{ "aria-label": "vehicle type" }}
       >
         {vehicleTypes.map((type) => (
           <MenuItem key={type} value={type}>
-            {type} {freeVehicles.includes(type) && '(No Fee)'}
+            {type}
           </MenuItem>
         ))}
       </TextField>
@@ -71,15 +92,26 @@ const TollCalculator = () => {
         variant="contained"
         color="primary"
         onClick={handleCalculate}
-        disabled={!vehicleType || !timestamp}
+        disabled={!vehicleType || !timestamp || loading}
         sx={{ mt: 2 }}
       >
-        Calculate Fee
+        {loading ? (
+          <CircularProgress size={24} color="inherit" />
+        ) : (
+          "Calculate Fee"
+        )}
       </Button>
 
-      {fee !== null && (
+      {error && (
+        <Alert severity="error" sx={{ mt: 2 }}>
+          {error}
+        </Alert>
+      )}
+
+      {fee !== null && !error && (
         <Alert severity="info" sx={{ mt: 2 }}>
           Toll fee: {fee} SEK
+          {reason && <div>{reason}</div>}
         </Alert>
       )}
     </Box>
