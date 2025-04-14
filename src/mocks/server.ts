@@ -165,18 +165,6 @@ export function makeServer({ environment = "development" } = {}) {
       });
 
       // Get vehicle by registration number
-      // this.get("/vehicles/:registrationNumber", (schema, request) => {
-      //   const registrationNumber = request.params.registrationNumber;
-      //   const vehicle = schema.where("vehicle", {
-      //     attrs: { registrationNumber },
-      //   }).models[0];
-      //   if (!vehicle) {
-      //     return new Response(404, {}, { error: "Vehicle not found" });
-      //   }
-      //   return vehicle;
-      // });
-
-      // Get vehicle by registration number
       this.get("/vehicles/:registrationNumber", (schema, request) => {
         const registrationNumber = request.params.registrationNumber;
         const vehicle = schema.where("vehicle", { registrationNumber } as never)

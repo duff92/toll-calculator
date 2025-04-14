@@ -6,60 +6,41 @@ import {
   Alert,
   CircularProgress,
 } from "@mui/material";
-import { useState } from "react";
 
-const vehicleTypes = [
-  "Car",
-  "Motorbike",
-  "Emergency",
-  "Diplomat",
-  "Bus",
-  "Truck",
-];
+interface TollCalculatorProps {
+  // Form values
+  vehicleType: string;
+  timestamp: string;
+  onVehicleTypeChange: (vehicleType: string) => void;
+  onTimestampChange: (timestamp: string) => void;
 
-const TollCalculator = () => {
-  const [vehicleType, setVehicleType] = useState("");
-  const [timestamp, setTimestamp] = useState("");
-  const [fee, setFee] = useState<number | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [reason, setReason] = useState<string | null>(null);
+  // Calculation results
+  fee: number | null;
+  reason: string | null;
 
-  const handleCalculate = async () => {
-    setLoading(true);
-    setError(null);
-    setReason(null);
+  // Status
+  loading: boolean;
+  error: string | null;
 
-    try {
-      // Format timestamp to ISO string if needed
-      const formattedTimestamp = new Date(timestamp).toISOString();
+  // Available options
+  vehicleTypes?: string[];
 
-      const response = await fetch("/api/calculate-toll", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          vehicleType,
-          timestamp: formattedTimestamp,
-        }),
-      });
+  // Actions
+  onCalculate: () => void;
+}
 
-      if (!response.ok) {
-        throw new Error("Failed to calculate toll fee");
-      }
-
-      const data = await response.json();
-      setFee(data.fee);
-      setReason(data.reason);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
-      setFee(null);
-    } finally {
-      setLoading(false);
-    }
-  };
-
+const TollCalculator = ({
+  vehicleType,
+  timestamp,
+  onVehicleTypeChange,
+  onTimestampChange,
+  fee,
+  reason,
+  loading,
+  error,
+  vehicleTypes = ["Car", "Motorbike", "Emergency", "Diplomat", "Bus", "Truck"],
+  onCalculate,
+}: TollCalculatorProps) => {
   return (
     <Box mt={2} aria-live="polite">
       <TextField
@@ -67,7 +48,7 @@ const TollCalculator = () => {
         label="Vehicle Type"
         fullWidth
         value={vehicleType}
-        onChange={(e) => setVehicleType(e.target.value)}
+        onChange={(e) => onVehicleTypeChange(e.target.value)}
         margin="normal"
         inputProps={{ "aria-label": "vehicle type" }}
       >
@@ -84,14 +65,14 @@ const TollCalculator = () => {
         fullWidth
         InputLabelProps={{ shrink: true }}
         value={timestamp}
-        onChange={(e) => setTimestamp(e.target.value)}
+        onChange={(e) => onTimestampChange(e.target.value)}
         margin="normal"
       />
 
       <Button
         variant="contained"
         color="primary"
-        onClick={handleCalculate}
+        onClick={onCalculate}
         disabled={!vehicleType || !timestamp || loading}
         sx={{ mt: 2 }}
       >
