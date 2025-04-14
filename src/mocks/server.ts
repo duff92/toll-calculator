@@ -178,9 +178,7 @@ export function makeServer({ environment = "development" } = {}) {
       // Get all toll passages for vehicle id
       this.get("/passages/:vehicleId", (schema, request) => {
         const vehicleId = request.params.vehicleId;
-        const passages = schema.where("passage", {
-          attrs: { vehicleId },
-        }).models;
+        const passages = schema.where("passage", { vehicleId } as never).models;
         return passages;
       });
 

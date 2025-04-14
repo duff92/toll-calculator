@@ -29,8 +29,8 @@ const Sidebar: React.FC<SidebarProps> = ({
   width = 240
 }) => {
   const navItems = [
+    { text: "Toll Passages", icon: <PassagesIcon />, path: "/" },
     { text: "Vehicles", icon: <VehiclesIcon />, path: "/vehicles" },
-    { text: "Toll Passages", icon: <PassagesIcon />, path: "/passages" },
     { text: "Calculate Toll", icon: <CalculateIcon />, path: "/calculate" },
     { text: "Settings", icon: <SettingsIcon />, path: "/settings" },
   ];
