@@ -3,9 +3,9 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  IconButton,
   Box,
   Container,
+  Button,
 } from "@mui/material";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
@@ -23,14 +23,14 @@ const MainLayout: React.FC = () => {
     <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
+          <Button
             color="inherit"
             onClick={toggleSidebar}
             sx={{ mr: 2 }}
+            startIcon={<MenuIcon />}
           >
-            <MenuIcon />
-          </IconButton>
+            Menu
+          </Button>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Toll Calculator
           </Typography>

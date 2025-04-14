@@ -17,16 +17,14 @@ const VehicleInformation = ({ vehicle }: VehicleInformationProps) => {
 
   return (
     <Paper sx={{ mt: 2 }}>
-        <Box sx={{ backgroundColor: theme.palette.grey[100], p: 2, mb: 2 }}>
-          <Typography variant="h3" component="h2">
-            {vehicle.make} {vehicle.model}
-          </Typography>
-          <Typography variant="subtitle1">
-            {vehicle.registrationNumber}
-          </Typography>
-        </Box>
+      <Box sx={{ backgroundColor: theme.palette.grey[100], p: 2, mb: 2 }}>
+        <Typography variant="h3" component="h2">
+          {vehicle.make} {vehicle.model}
+        </Typography>
+        <Typography variant="body1">{vehicle.registrationNumber}</Typography>
+      </Box>
 
-      <Box sx={{ p: 2}}>
+      <Box sx={{ p: 2 }}>
         <Grid container spacing={2}>
           <Grid size={{ xs: 6, md: 4 }}>
             <Stack direction="row" alignItems="center" spacing={1}>

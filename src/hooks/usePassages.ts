@@ -23,11 +23,12 @@ export function usePassages() {
   useEffect(() => {
     if (selectedVehicleId) {
       dispatch(fetchPassagesByVehicle(selectedVehicleId));
-    } else {
-      dispatch(fetchPassagesByDate({
-        date: selectedDate,
-        vehicleType: selectedVehicleType || undefined
-      }));
+      dispatch(
+        fetchPassagesByDate({
+          date: selectedDate,
+          vehicleId: selectedVehicleId || undefined,
+        })
+      );
     }
   }, [dispatch, selectedDate, selectedVehicleType, selectedVehicleId]);
 
@@ -73,9 +74,9 @@ export function usePassages() {
     formatTime,
 
     // Actions
-    fetchPassagesByDate: (date?: string, vehicleType?: string) =>
-      dispatch(fetchPassagesByDate({ date, vehicleType })),
+    fetchPassagesByDate: (date?: string, vehicleId?: string) =>
+      dispatch(fetchPassagesByDate({ date, vehicleId })),
     fetchPassagesByVehicle: (vehicleId: string) =>
-      dispatch(fetchPassagesByVehicle(vehicleId))
+      dispatch(fetchPassagesByVehicle(vehicleId)),
   };
 }

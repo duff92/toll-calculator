@@ -93,14 +93,14 @@ const PassagesList: React.FC<PassagesListProps> = ({ vehicleId }) => {
           <Typography variant="h6" component="h2" gutterBottom>
             Filter Passages
           </Typography>
-          <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
+          <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="Date"
                 value={new Dayjs(selectedDate)}
                 onChange={(newDate) => {
                   if (newDate) {
-                    setSelectedDate(newDate.toISOString().split('T')[0]);
+                    setSelectedDate(newDate.toISOString().split("T")[0]);
                   }
                 }}
                 sx={{ flex: 1 }}
@@ -127,19 +127,36 @@ const PassagesList: React.FC<PassagesListProps> = ({ vehicleId }) => {
 
       {dailySummaries && dailySummaries.length > 0 ? (
         dailySummaries.map((summary) => (
-          <Paper key={summary.date} sx={{ mb: 3, overflow: 'hidden' }}>
-            <Box sx={{ p: 2, bgcolor: 'primary.main', color: 'primary.contrastText' }}>
-              <Typography variant="h6">{formatDate(summary.date)}</Typography>
-              <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Paper key={summary.date} sx={{ mb: 3, overflow: "hidden" }}>
+            <Box
+              sx={{
+                p: 2,
+                bgcolor: "primary.main",
+                color: "primary.contrastText",
+              }}
+            >
+              <Typography variant="h6" component="h3">
+                {formatDate(summary.date)}
+              </Typography>
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
                 <Typography variant="body1">
-                  {summary.passages.length} passage{summary.passages.length !== 1 ? 's' : ''}
+                  {summary.passages.length} passage
+                  {summary.passages.length !== 1 ? "s" : ""}
                 </Typography>
                 <Stack direction="row" spacing={1} alignItems="center">
                   <Typography variant="body1" fontWeight="bold">
                     Total: {summary.totalFee} SEK
                   </Typography>
                   {summary.maxDailyFeeApplied && (
-                    <Chip label="Max daily fee applied" size="small" color="secondary" />
+                    <Chip
+                      label="Max daily fee applied"
+                      size="small"
+                      color="secondary"
+                    />
                   )}
                 </Stack>
               </Box>
@@ -152,7 +169,6 @@ const PassagesList: React.FC<PassagesListProps> = ({ vehicleId }) => {
                 <TableHead>
                   <TableRow>
                     <TableCell>Time</TableCell>
-                    <TableCell>Vehicle Type</TableCell>
                     <TableCell>Location</TableCell>
                     <TableCell align="right">Fee</TableCell>
                   </TableRow>
@@ -161,7 +177,6 @@ const PassagesList: React.FC<PassagesListProps> = ({ vehicleId }) => {
                   {summary.passages.map((passage) => (
                     <TableRow key={passage.id}>
                       <TableCell>{formatTime(passage.timestamp)}</TableCell>
-                      <TableCell>{passage.vehicleId}</TableCell>
                       <TableCell>{passage.location}</TableCell>
                       <TableCell align="right">
                         {passage.fee === 0 ? (

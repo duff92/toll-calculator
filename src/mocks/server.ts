@@ -248,10 +248,12 @@ export function makeServer({ environment = "development" } = {}) {
         "/passages",
         (
           schema,
-          request: { queryParams: { date?: string; vehicleType?: string } }
+          request: { queryParams: { date?: string; vehicleId?: string } }
         ) => {
-          const { date, vehicleType } = request.queryParams;
+          const { date, vehicleId } = request.queryParams;
           let passages = schema.all("passage").models;
+
+          // Filter by date if provided
           if (date) {
             const dateStart = new Date(date);
             dateStart.setHours(0, 0, 0, 0);
@@ -264,14 +266,15 @@ export function makeServer({ environment = "development" } = {}) {
               return passageDate >= dateStart && passageDate <= dateEnd;
             });
           }
-          if (vehicleType) {
-            const vehicleIds = schema
-              .where("vehicle", { attrs: { type: vehicleType } })
-              .models.map((v) => v.id);
-            passages = passages.filter((passage) =>
-              vehicleIds.includes((passage.attrs as TollPassage).vehicleId)
+
+          // Filter by vehicleId directly
+          if (vehicleId) {
+            passages = passages.filter(
+              (passage) =>
+                (passage.attrs as TollPassage).vehicleId === vehicleId
             );
           }
+
           // Group passages by date
           const passagesByDate: Record<string, TollPassage[]> = passages.reduce(
             (acc, passage) => {
@@ -281,17 +284,10 @@ export function makeServer({ environment = "development" } = {}) {
               if (!acc[date]) {
                 acc[date] = [];
               }
-              // Find vehicle type - use schema.where instead of schema.find
-              const vehicles = schema.where("vehicle", {
-                attrs: { id: (passage.attrs as TollPassage).vehicleId },
-              }).models;
-              const vehicle = vehicles.length > 0 ? vehicles[0] : null;
               acc[date].push({
                 id: (passage.attrs as TollPassage).id,
                 timestamp: (passage.attrs as TollPassage).timestamp,
-                vehicleId: vehicle
-                  ? (vehicle.attrs as Vehicle).type
-                  : "Unknown",
+                vehicleId: (passage.attrs as TollPassage).vehicleId,
                 fee: (passage.attrs as TollPassage).fee,
                 location: (passage.attrs as TollPassage).location,
               });
@@ -299,30 +295,13 @@ export function makeServer({ environment = "development" } = {}) {
             },
             {} as Record<string, TollPassage[]>
           );
-          // Calculate daily totals
+
+          // Calculate daily summaries
           const dailySummaries = Object.keys(passagesByDate).map((date) => {
             const passages = passagesByDate[date];
-            // Group by vehicle for toll calculation
-            const passagesByVehicle: Record<
-              string,
-              Array<{ timestamp: string; vehicleId: string }>
-            > = passages.reduce((acc, passage) => {
-              if (!acc[passage.vehicleId]) {
-                acc[passage.vehicleId] = [];
-              }
-              acc[passage.vehicleId].push({
-                timestamp: passage.timestamp,
-                vehicleId: passage.vehicleId,
-              });
-              return acc;
-            }, {} as Record<string, Array<{ timestamp: string; vehicleId: string }>>);
-            // Calculate fee for each vehicle
-            let totalFee = 0;
-            Object.values(passagesByVehicle).forEach((vehiclePassages) => {
-              totalFee += calculateDailyFee(vehiclePassages);
-            });
-            // Cap at max daily fee
+            const totalFee = calculateDailyFee(passages);
             const cappedFee = Math.min(totalFee, tollRules.maxDailyFee);
+
             return {
               date,
               passages,
@@ -330,6 +309,7 @@ export function makeServer({ environment = "development" } = {}) {
               maxDailyFeeApplied: totalFee > tollRules.maxDailyFee,
             };
           });
+
           return { dailySummaries };
         }
       );
