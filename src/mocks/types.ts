@@ -43,6 +43,11 @@ export enum VehicleType {
 export interface Vehicle {
   id: string;
   type: VehicleType;
+  make: string;
+  model: string;
+  year: number;
+  color: string;
+  registrationNumber: string;
 }
 
 export interface TollRulesByTime {
