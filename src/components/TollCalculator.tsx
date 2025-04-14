@@ -4,41 +4,43 @@ import {
   MenuItem,
   Box,
   Alert,
-} from '@mui/material';
-import { useState } from 'react';
+  CircularProgress,
+} from "@mui/material";
 
-const vehicleTypes = [
-  'Car',
-  'Motorbike',
-  'Emergency',
-  'Diplomat',
-  'Bus',
-  'Truck',
-];
+interface TollCalculatorProps {
+  // Form values
+  vehicleType: string;
+  timestamp: string;
+  onVehicleTypeChange: (vehicleType: string) => void;
+  onTimestampChange: (timestamp: string) => void;
 
-const freeVehicles = ['Motorbike', 'Emergency', 'Diplomat', 'Bus'];
+  // Calculation results
+  fee: number | null;
+  reason: string | null;
 
-const TollCalculator = () => {
-  const [vehicleType, setVehicleType] = useState('');
-  const [timestamp, setTimestamp] = useState('');
-  const [fee, setFee] = useState<number | null>(null);
+  // Status
+  loading: boolean;
+  error: string | null;
 
-  const handleCalculate = () => {
-    if (freeVehicles.includes(vehicleType)) {
-      setFee(0);
-      return;
-    }
+  // Available options
+  vehicleTypes?: string[];
 
-    // Mock logic — replace with real API logic later
-    const hour = new Date(timestamp).getHours();
-    let calculatedFee = 8;
-    if (hour >= 7 && hour < 9) calculatedFee = 18;
-    else if (hour >= 6 && hour < 7) calculatedFee = 13;
-    else if (hour >= 16 && hour < 18) calculatedFee = 18;
+  // Actions
+  onCalculate: () => void;
+}
 
-    setFee(calculatedFee);
-  };
-
+const TollCalculator = ({
+  vehicleType,
+  timestamp,
+  onVehicleTypeChange,
+  onTimestampChange,
+  fee,
+  reason,
+  loading,
+  error,
+  vehicleTypes = ["Car", "Motorbike", "Emergency", "Diplomat", "Bus", "Truck"],
+  onCalculate,
+}: TollCalculatorProps) => {
   return (
     <Box mt={2} aria-live="polite">
       <TextField
@@ -46,13 +48,13 @@ const TollCalculator = () => {
         label="Vehicle Type"
         fullWidth
         value={vehicleType}
-        onChange={(e) => setVehicleType(e.target.value)}
+        onChange={(e) => onVehicleTypeChange(e.target.value)}
         margin="normal"
-        inputProps={{ 'aria-label': 'vehicle type' }}
+        inputProps={{ "aria-label": "vehicle type" }}
       >
         {vehicleTypes.map((type) => (
           <MenuItem key={type} value={type}>
-            {type} {freeVehicles.includes(type) && '(No Fee)'}
+            {type}
           </MenuItem>
         ))}
       </TextField>
@@ -63,23 +65,34 @@ const TollCalculator = () => {
         fullWidth
         InputLabelProps={{ shrink: true }}
         value={timestamp}
-        onChange={(e) => setTimestamp(e.target.value)}
+        onChange={(e) => onTimestampChange(e.target.value)}
         margin="normal"
       />
 
       <Button
         variant="contained"
         color="primary"
-        onClick={handleCalculate}
-        disabled={!vehicleType || !timestamp}
+        onClick={onCalculate}
+        disabled={!vehicleType || !timestamp || loading}
         sx={{ mt: 2 }}
       >
-        Calculate Fee
+        {loading ? (
+          <CircularProgress size={24} color="inherit" />
+        ) : (
+          "Calculate Fee"
+        )}
       </Button>
 
-      {fee !== null && (
+      {error && (
+        <Alert severity="error" sx={{ mt: 2 }}>
+          {error}
+        </Alert>
+      )}
+
+      {fee !== null && !error && (
         <Alert severity="info" sx={{ mt: 2 }}>
           Toll fee: {fee} SEK
+          {reason && <div>{reason}</div>}
         </Alert>
       )}
     </Box>
