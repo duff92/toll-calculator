@@ -22,7 +22,7 @@
     },
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": "./tsconfig.json"
+    "projectService": true
   },
   "plugins": [
     "react",
@@ -62,7 +62,15 @@
       "version": "detect"
     },
     "import/resolver": {
-      "typescript": {}
-    }
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    },
+    "import/extensions": [
+      ".js",
+      ".jsx",
+      ".ts",
+      ".tsx"
+    ]
   }
 }

@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
 import {
   TextField,
   Button,
   MenuItem,
-  Typography,
   Box,
   Alert,
 } from '@mui/material';
+import { useState } from 'react';
 
 const vehicleTypes = [
   'Car',

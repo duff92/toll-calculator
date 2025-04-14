@@ -1,10 +1,10 @@
-import * as React from 'react';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import ProTip from './ProTip';
-import TollCalculator from './components/TollCalculator';
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Link from "@mui/material/Link";
+import Typography from "@mui/material/Typography";
+
+import TollCalculator from "./components/TollCalculator";
+import ProTip from "./ProTip";
 
 function Copyright() {
   return (
@@ -12,13 +12,13 @@ function Copyright() {
       variant="body2"
       align="center"
       sx={{
-        color: 'text.secondary',
+        color: "text.secondary",
       }}
     >
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}.
     </Typography>
   );
