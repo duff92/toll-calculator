@@ -12,6 +12,7 @@ import { Outlet } from "react-router-dom";
 
 import Sidebar from "./Sidebar";
 import SkipLink from './SkipLink'
+import ThemeToggle from './ThemeToggle'
 
 const MainLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -39,6 +40,9 @@ const MainLayout: React.FC = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Toll Calculator
           </Typography>
+
+          {/* Add the theme toggle button */}
+          <ThemeToggle />
         </Toolbar>
       </AppBar>
 

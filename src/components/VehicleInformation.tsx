@@ -17,7 +17,17 @@ const VehicleInformation = ({ vehicle }: VehicleInformationProps) => {
 
   return (
     <Paper sx={{ mt: 2 }}>
-      <Box sx={{ backgroundColor: theme.palette.grey[100], p: 2, mb: 2 }}>
+      <Box
+        sx={{
+          p: 2,
+          mb: 2,
+          borderRadius: `${theme.shape.borderRadius}px ${theme.shape.borderRadius}px 0 0`,
+          bgcolor:
+            theme.palette.mode === 'dark'
+              ? theme.palette.grey[800]
+              : theme.palette.grey[100],
+        }}
+      >
         <Typography variant="h3" component="h2">
           {vehicle.make} {vehicle.model}
         </Typography>
@@ -64,7 +74,7 @@ const VehicleInformation = ({ vehicle }: VehicleInformationProps) => {
         </Grid>
       </Box>
     </Paper>
-  );
+  )
 };
 
 export default VehicleInformation;

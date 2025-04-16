@@ -1,26 +1,44 @@
 import { CssBaseline } from "@mui/material";
-import { ThemeProvider } from "@mui/material/styles";
-import * as React from "react";
-import * as ReactDOM from "react-dom/client";
-import { Provider } from "react-redux";
+import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles'
+import * as React from 'react'
+import * as ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
 
-import App from "./App";
+import App from './App'
+import { ThemeProvider } from './context/ThemeContext'
 import { setupStore } from './store/store'
-import theme from './theme'
+import { createAppTheme } from './theme'
+import { useThemeContext } from './context/ThemeContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root')!)
 
 // Initialize the Redux store
 const store = setupStore()
 
+// ThemeWrapper uses the theme context to create the appropriate MUI theme
+const ThemeWrapper: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const { mode } = useThemeContext()
+  const theme = React.useMemo(() => createAppTheme(mode), [mode])
+
+  return (
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </MuiThemeProvider>
+  )
+}
+
 const renderApp = () => {
   root.render(
     <React.StrictMode>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Provider store={store}>
-          <App />
-        </Provider>
+      <ThemeProvider>
+        <ThemeWrapper>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </ThemeWrapper>
       </ThemeProvider>
     </React.StrictMode>,
   )
