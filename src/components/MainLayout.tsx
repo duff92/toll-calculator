@@ -11,16 +11,20 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
 import Sidebar from "./Sidebar";
+import SkipLink from './SkipLink'
 
 const MainLayout: React.FC = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
+    setSidebarOpen(!sidebarOpen)
+  }
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      {/* Add skip to main content link */}
+      <SkipLink />
+
       <AppBar position="static">
         <Toolbar>
           <Button
@@ -28,6 +32,7 @@ const MainLayout: React.FC = () => {
             onClick={toggleSidebar}
             sx={{ mr: 2 }}
             startIcon={<MenuIcon />}
+            aria-label="Open menu"
           >
             Menu
           </Button>
@@ -39,11 +44,26 @@ const MainLayout: React.FC = () => {
 
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      <Container component="main" sx={{ flexGrow: 1, py: 3 }}>
+      <Container
+        component="main"
+        id="main-content"
+        sx={{
+          flexGrow: 1,
+          py: 3,
+          '&:focus': {
+            outline: 'none',
+          },
+          '&:focus-visible': {
+            outline: (t) => `2px solid ${t.palette.primary.main}`,
+            outlineOffset: '4px',
+          },
+        }}
+        tabIndex={-1} // Makes the container focusable for skip link but not in tab order
+      >
         <Outlet />
       </Container>
     </Box>
-  );
-};
+  )
+}
 
 export default MainLayout;
