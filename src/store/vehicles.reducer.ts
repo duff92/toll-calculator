@@ -70,7 +70,7 @@ const vehiclesSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchVehicleByRegNumber.fulfilled, (state, action) => {
-        state.currentVehicle = action.payload.vehicle;
+        state.currentVehicle = action.payload
         state.loading = false;
       })
       .addCase(fetchVehicleByRegNumber.rejected, (state, action) => {
