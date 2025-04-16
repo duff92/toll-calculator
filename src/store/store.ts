@@ -1,22 +1,24 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
-import calculationReducer from './calculation.reducer';
-import passagesReducer from './passages.reducer';
-import vehiclesReducer from './vehicles.reducer';
+import calculationReducer from './calculation.reducer'
+import passagesReducer from './passages.reducer'
+import vehiclesReducer from './vehicles.reducer'
 
-const store = configureStore({
-  reducer: {
-    vehicles: vehiclesReducer,
-    passages: passagesReducer,
-    calculation: calculationReducer,
-  },
-});
+// Create the root reducer separately so we can extract the RootState type
+const rootReducer = combineReducers({
+  vehicles: vehiclesReducer,
+  passages: passagesReducer,
+  calculation: calculationReducer,
+})
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export const setupStore = (preloadedState?: Partial<RootState>) => {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState,
+  })
+}
 
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-
-export default store;
+export type RootState = ReturnType<typeof rootReducer>
+export type AppStore = ReturnType<typeof setupStore>
+export type AppDispatch = AppStore['dispatch']

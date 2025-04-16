@@ -93,14 +93,14 @@ const PassagesList: React.FC<PassagesListProps> = ({ vehicleId }) => {
           <Typography variant="h6" component="h2" gutterBottom>
             Filter Passages
           </Typography>
-          <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+          <Stack direction={{ xs: 'column', md: 'row' }} spacing={2}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="Date"
                 value={new Dayjs(selectedDate)}
                 onChange={(newDate) => {
                   if (newDate) {
-                    setSelectedDate(newDate.toISOString().split("T")[0]);
+                    setSelectedDate(newDate.toISOString().split('T')[0])
                   }
                 }}
                 sx={{ flex: 1 }}
@@ -126,13 +126,13 @@ const PassagesList: React.FC<PassagesListProps> = ({ vehicleId }) => {
       )}
 
       {dailySummaries && dailySummaries.length > 0 ? (
-        dailySummaries.map((summary) => (
-          <Paper key={summary.date} sx={{ mb: 3, overflow: "hidden" }}>
+        dailySummaries.map((summary: any) => (
+          <Paper key={summary.date} sx={{ mb: 3, overflow: 'hidden' }}>
             <Box
               sx={{
                 p: 2,
-                bgcolor: "primary.main",
-                color: "primary.contrastText",
+                bgcolor: 'primary.main',
+                color: 'primary.contrastText',
               }}
             >
               <Typography variant="h6" component="h3">
@@ -145,7 +145,7 @@ const PassagesList: React.FC<PassagesListProps> = ({ vehicleId }) => {
               >
                 <Typography variant="body1">
                   {summary.passages.length} passage
-                  {summary.passages.length !== 1 ? "s" : ""}
+                  {summary.passages.length !== 1 ? 's' : ''}
                 </Typography>
                 <Stack direction="row" spacing={1} alignItems="center">
                   <Typography variant="body1" fontWeight="bold">
@@ -174,7 +174,7 @@ const PassagesList: React.FC<PassagesListProps> = ({ vehicleId }) => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {summary.passages.map((passage) => (
+                  {summary.passages.map((passage: any) => (
                     <TableRow key={passage.id}>
                       <TableCell>{formatTime(passage.timestamp)}</TableCell>
                       <TableCell>{passage.location}</TableCell>
@@ -198,7 +198,7 @@ const PassagesList: React.FC<PassagesListProps> = ({ vehicleId }) => {
         </Alert>
       )}
     </Box>
-  );
+  )
 };
 
 export default PassagesList;

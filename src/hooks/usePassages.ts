@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { fetchPassagesByDate, fetchPassagesByVehicle } from '../store/passages.reducer';
-import { useAppDispatch, useAppSelector } from '../store/store';
+import { useAppDispatch, useAppSelector } from './redux-hooks'
 import dayjs from "dayjs";
 
 export function usePassages() {

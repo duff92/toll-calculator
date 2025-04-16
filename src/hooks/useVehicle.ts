@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../store/store';
+import { useAppDispatch, useAppSelector } from './redux-hooks'
 import { fetchVehicleByRegNumber } from '../store/vehicles.reducer';
 
 export const useVehicle = () => {
