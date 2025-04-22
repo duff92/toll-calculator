@@ -21,6 +21,12 @@
     },
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["./src", "./**.ts", "eslint.config.mjs", "./tests/**.tsx"],
+  "include": [
+    "./src",
+    "./**.ts",
+    "eslint.config.mjs",
+    "./tests/**.tsx",
+    "./tests/e2e/**.ts"
+  ],
   "exclude": ["dist"]
 }
