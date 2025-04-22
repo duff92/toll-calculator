@@ -7,7 +7,7 @@
     "url": "https://github.com/duff92/toll-calculator"
   },
   "scripts": {
-    "msw:init": "npx msw init public/ --save",
+    "msw:init": "npx msw init public/ --save --no-input",
     "dev": "npm run msw:init && vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
@@ -34,6 +34,7 @@
     "react-router-dom": "^6"
   },
   "devDependencies": {
+    "@eslint/compat": "^1.2.8",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",

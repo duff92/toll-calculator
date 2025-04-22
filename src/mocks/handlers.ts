@@ -164,6 +164,18 @@ const passages = [
   // Add other sample passages
 ]
 
+// Add new interface definitions
+interface TollFeeBody {
+  vehicleType: VehicleType;
+  timestamp: string;
+}
+
+interface PassageBody {
+  vehicleType: VehicleType;
+  timestamp: string;
+  location: string;
+}
+
 // Helper functions
 function isTollFreeVehicle(vehicleType: VehicleType) {
   return tollRules.freeVehicleTypes.includes(vehicleType)
@@ -195,7 +207,7 @@ function isTollFreeDate(date: string) {
   return false
 }
 
-function getTollFee(timestamp: any, vehicleType: any) {
+function getTollFee(timestamp: string, vehicleType: VehicleType) {
   if (isTollFreeVehicle(vehicleType)) return 0
   if (isTollFreeDate(timestamp)) return 0
 
@@ -295,8 +307,8 @@ export const handlers = [
 
   // Calculate toll fee
   http.post('/api/calculate-toll', async ({ request }) => {
-    const body = await request.json()
-    const { vehicleType, timestamp } = body as any
+    const body = (await request.json()) as TollFeeBody
+    const { vehicleType, timestamp } = body
 
     if (!vehicleType || !timestamp) {
       return new HttpResponse(
@@ -321,8 +333,8 @@ export const handlers = [
   }),
   // Record a new toll passage
   http.post('/api/passages', async ({ request }) => {
-    const body = await request.json()
-    const { vehicleType, timestamp, location } = body as any
+    const body = (await request.json()) as PassageBody
+    const { vehicleType, timestamp, location } = body
 
     if (!vehicleType || !timestamp || !location) {
       return new HttpResponse(
@@ -405,14 +417,17 @@ export const handlers = [
     }
 
     // Group passages by date
-    const passagesByDate = filteredPassages.reduce((acc: any, passage) => {
-      const date = passage.timestamp.split('T')[0]
-      if (!acc[date]) {
-        acc[date] = []
-      }
-      acc[date].push(passage)
-      return acc
-    }, {})
+    const passagesByDate = filteredPassages.reduce(
+      (acc: Record<string, TollPassage[]>, passage) => {
+        const date = passage.timestamp.split('T')[0]
+        if (!acc[date]) {
+          acc[date] = []
+        }
+        acc[date].push(passage)
+        return acc
+      },
+      {},
+    )
 
     // Calculate daily summaries
     const dailySummaries = Object.keys(passagesByDate).map((date) => {

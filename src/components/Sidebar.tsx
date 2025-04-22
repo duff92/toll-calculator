@@ -9,12 +9,11 @@ import {
   Typography
 } from "@mui/material";
 import {
-  Dashboard as DashboardIcon,
   DirectionsCar as VehiclesIcon,
   Receipt as PassagesIcon,
   Calculate as CalculateIcon,
-  Settings as SettingsIcon
-} from "@mui/icons-material";
+  Settings as SettingsIcon,
+} from '@mui/icons-material'
 import { NavLink } from "react-router-dom";
 
 interface SidebarProps {

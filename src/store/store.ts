@@ -1,5 +1,4 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 import calculationReducer from './calculation.reducer'
 import passagesReducer from './passages.reducer'

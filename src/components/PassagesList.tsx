@@ -23,6 +23,7 @@ import { Dayjs } from "dayjs";
 import { useEffect } from "react";
 
 import { usePassages } from "../hooks/usePassages";
+import { DailyTollSummary, TollPassage } from '../mocks/types'
 
 interface PassagesListProps {
   vehicleId?: string;
@@ -126,7 +127,7 @@ const PassagesList: React.FC<PassagesListProps> = ({ vehicleId }) => {
       )}
 
       {dailySummaries && dailySummaries.length > 0 ? (
-        dailySummaries.map((summary: any) => (
+        dailySummaries.map((summary: DailyTollSummary) => (
           <Paper key={summary.date} sx={{ mb: 3, overflow: 'hidden' }}>
             <Box
               sx={{
@@ -174,7 +175,7 @@ const PassagesList: React.FC<PassagesListProps> = ({ vehicleId }) => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {summary.passages.map((passage: any) => (
+                  {summary.passages.map((passage: TollPassage) => (
                     <TableRow key={passage.id}>
                       <TableCell>{formatTime(passage.timestamp)}</TableCell>
                       <TableCell>{passage.location}</TableCell>

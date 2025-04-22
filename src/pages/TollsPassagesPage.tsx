@@ -1,9 +1,9 @@
-import { Box, Typography, Divider } from "@mui/material";
+import { Box, Typography } from '@mui/material'
 
-import PassagesList from "../components/PassagesList";
-import RegNumberInput from "../components/RegNumberInput";
-import VehicleInformation from "../components/VehicleInformation";
-import { useVehicle } from "../hooks/useVehicle";
+import PassagesList from '../components/PassagesList'
+import RegNumberInput from '../components/RegNumberInput'
+import VehicleInformation from '../components/VehicleInformation'
+import { useVehicle } from '../hooks/useVehicle'
 
 const TollsPassagesPage = () => {
   const {
@@ -13,7 +13,7 @@ const TollsPassagesPage = () => {
     vehicle,
     loading: vehicleLoading,
     error: vehicleError,
-  } = useVehicle();
+  } = useVehicle()
 
   return (
     <Box sx={{ my: 4 }}>
@@ -50,6 +50,6 @@ const TollsPassagesPage = () => {
       )}
     </Box>
   )
-};
+}
 
-export default TollsPassagesPage;
+export default TollsPassagesPage

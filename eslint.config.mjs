@@ -28,7 +28,11 @@ export default [
       'public/mockServiceWorker.js',
     ],
   },
-  ...compat.extends('ts-prefixer', 'plugin:jsx-a11y/recommended'),
+  // Replace the non-existent ts-prefixer with standard TypeScript recommended config
+  ...compat.extends(
+    'plugin:@typescript-eslint/recommended',
+    'plugin:jsx-a11y/recommended',
+  ),
   {
     plugins: {
       'react-hooks': fixupPluginRules(reactHooks),
@@ -38,18 +42,26 @@ export default [
     languageOptions: {
       globals: {},
       parser: tsParser,
-      ecmaVersion: 5,
-      sourceType: 'script',
+      ecmaVersion: 2022, // Update from 5 to a more modern version
+      sourceType: 'module', // Change from 'script' to 'module' for ESM
 
       parserOptions: {
         project: ['tsconfig.json'],
+        ecmaFeatures: {
+          jsx: true,
+        },
       },
     },
 
-    settings: {},
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
 
     rules: {
       'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
     },
   },
 ]
