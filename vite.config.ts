@@ -9,15 +9,15 @@ export default defineConfig({
   build: {
     sourcemap: true,
   },
-  plugins: [react(), EnvironmentPlugin(["REACT_APP_TEXT"])],
-  publicDir: "public",
+  plugins: [react(), EnvironmentPlugin('all', { prefix: 'VITE_' })],
+  publicDir: 'public',
   server: {
     host: true,
     port: 3000,
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      '@': path.resolve(__dirname, './src'),
     },
   },
-});
+})
