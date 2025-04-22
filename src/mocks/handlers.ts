@@ -90,6 +90,15 @@ const vehicles = [
   // Add other vehicles from your Mirage setup
 ]
 
+// Update the type definition for tollRules
+interface YearFreeDays {
+  [month: number]: number[];
+}
+
+interface FreeDays {
+  [year: number]: YearFreeDays;
+}
+
 // Toll rules
 const tollRules = {
   maxDailyFee: 60,
@@ -124,7 +133,7 @@ const tollRules = {
       11: [1], // All Saints' Day
       12: [24, 25, 26, 31], // Christmas, New Year's Eve
     },
-  },
+  } as FreeDays,
 }
 
 // Initialize passages with sample data
@@ -178,7 +187,7 @@ function isTollFreeDate(date: string) {
   if (
     tollRules.freeDays[year] &&
     tollRules.freeDays[year][month] &&
-    tollRules.freeDays[year][month].includes(day)
+    tollRules.freeDays[year][month]?.includes(day)
   ) {
     return true
   }
