@@ -17,8 +17,11 @@ const TollsPassagesPage = () => {
 
   return (
     <Box sx={{ my: 4 }}>
-      <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
-        Toll Passages
+      <Typography variant="h4" component="h1" gutterBottom>
+        Enter registration number
+      </Typography>
+      <Typography variant="body1" sx={{ mb: 2 }}>
+        Then we will show the toll passages for the car
       </Typography>
 
       <RegNumberInput
@@ -46,7 +49,7 @@ const TollsPassagesPage = () => {
         </>
       )}
     </Box>
-  );
+  )
 };
 
 export default TollsPassagesPage;

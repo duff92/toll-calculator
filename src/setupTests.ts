@@ -1,12 +1,10 @@
 import '@testing-library/jest-dom/vitest';
-import { afterEach, vi } from 'vitest';
-import { cleanup } from '@testing-library/react';
-import * as React from 'react';
+import { afterEach } from 'vitest'
 
 // Import the existing renderWithProviders utility
-import { renderWithProviders } from './utils/test-utils';
+import { renderWithProviders } from './utils/test-utils'
 
-import { server } from '../src/mocks/node'
+import { server } from '../src/mocks/server'
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
 

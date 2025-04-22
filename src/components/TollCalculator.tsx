@@ -50,7 +50,9 @@ const TollCalculator = ({
         value={vehicleType}
         onChange={(e) => onVehicleTypeChange(e.target.value)}
         margin="normal"
-        inputProps={{ "aria-label": "vehicle type" }}
+        slotProps={{
+          input: { 'aria-label': 'vehicle type' },
+        }}
       >
         {vehicleTypes.map((type) => (
           <MenuItem key={type} value={type}>
@@ -63,7 +65,10 @@ const TollCalculator = ({
         type="datetime-local"
         label="Toll Entry Time"
         fullWidth
-        InputLabelProps={{ shrink: true }}
+        slotProps={{
+          inputLabel: { shrink: true },
+          input: { 'aria-label': 'toll entry time' },
+        }}
         value={timestamp}
         onChange={(e) => onTimestampChange(e.target.value)}
         margin="normal"
@@ -79,7 +84,7 @@ const TollCalculator = ({
         {loading ? (
           <CircularProgress size={24} color="inherit" />
         ) : (
-          "Calculate Fee"
+          'Calculate Fee'
         )}
       </Button>
 
@@ -96,7 +101,7 @@ const TollCalculator = ({
         </Alert>
       )}
     </Box>
-  );
+  )
 };
 
 export default TollCalculator;

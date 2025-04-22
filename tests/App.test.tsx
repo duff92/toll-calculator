@@ -10,7 +10,9 @@ describe('App Component', () => {
     renderWithProviders(<App />)
 
     // Check if the page title "Toll Passages" exists in the document
-    const pageTitle = screen.getByRole('heading', { name: /toll passages/i })
+    const pageTitle = screen.getByRole('heading', {
+      name: /Enter registration number/i,
+    })
     expect(pageTitle).toBeInTheDocument()
   })
 })
