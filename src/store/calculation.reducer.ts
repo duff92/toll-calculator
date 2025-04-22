@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
 import type { TollRules } from '../mocks/types';
 
 // Thunk for calculating toll fee

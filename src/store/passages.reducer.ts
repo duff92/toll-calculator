@@ -13,20 +13,30 @@ export const fetchPassagesByVehicle = createAsyncThunk(
 
 // Thunk for fetching passages by date and vehicle type
 export const fetchPassagesByDate = createAsyncThunk(
-  'passages/fetchByDate',
-  async ({ date, vehicleType }: { date?: string; vehicleType?: string }) => {
-    let url = '/api/passages';
+  "passages/fetchByDate",
+  async ({
+    date,
+    numberOfDays,
+    vehicleId,
+  }: {
+    date?: string;
+    numberOfDays?: number;
+    vehicleId?: string;
+  }) => {
+    let url = "/api/passages";
     const params = new URLSearchParams();
 
-    if (date) params.append('date', date);
-    if (vehicleType) params.append('vehicleType', vehicleType);
+    if (date) params.append("date", date);
+    if (vehicleId) params.append("vehicleId", vehicleId);
+    if (numberOfDays)
+      params.append("numberOfDays", numberOfDays?.toString() || "30");
 
     if (params.toString()) {
       url += `?${params.toString()}`;
     }
 
     const response = await fetch(url);
-    if (!response.ok) throw new Error('Failed to fetch passages');
+    if (!response.ok) throw new Error("Failed to fetch passages");
     return await response.json();
   }
 );

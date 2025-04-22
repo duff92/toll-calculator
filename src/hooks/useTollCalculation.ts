@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { calculateToll, fetchTollRules, clearCalculation } from '../store/calculation.reducer';
-import { useAppDispatch, useAppSelector } from '../store/store';
+import { useAppDispatch, useAppSelector } from './redux-hooks'
 
 /**
  * Custom hook for toll calculation functionality

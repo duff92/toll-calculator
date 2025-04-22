@@ -74,10 +74,10 @@ const RegNumberInput: React.FC<RegNumberInputProps> = ({
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           error={!!displayError}
-          helperText={displayError || "Enter vehicle registration number (e.g., ABC123)"}
-          slotProps={
-            { input: { "aria-label": "registration number" } }
+          helperText={
+            displayError || 'Enter vehicle registration number (e.g., ABC123)'
           }
+          slotProps={{ input: { 'aria-label': 'registration number' } }}
           placeholder="ABC123"
         />
         <Button
@@ -90,7 +90,7 @@ const RegNumberInput: React.FC<RegNumberInputProps> = ({
         </Button>
       </Box>
     </Box>
-  );
+  )
 };
 
 export default RegNumberInput;
