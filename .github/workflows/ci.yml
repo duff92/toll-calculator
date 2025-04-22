@@ -5,43 +5,52 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4 # Updated to the latest version
+      - uses: actions/checkout@v4 # Updated to the latest version
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4 # Ensure Node.js version is specified
-      with:
-        node-version: '20' # Or specify the Node.js version you need
+      - name: Purge node_modules and npm cache
+        run: |
+          rm -rf node_modules
+          rm -f package-lock.json
+          npm cache clean --force
 
-    - name: Cache node modules
-      uses: actions/cache@v4
-      with:
-        path: |
-          ~/.npm
-          node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
+      - name: Setup Node.js
+        uses: actions/setup-node@v4 # Ensure Node.js version is specified
+        with:
+          node-version: '20' # Or specify the Node.js version you need
 
-    - name: Install modules
-      run: npm install
+      - name: Install pnpm
+        run: npm install -g pnpm
 
-    - name: Lint
-      run: npm run lint
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pnpm-store
+            node_modules
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
 
-    - name: Build
-      run: npm run build
+      - name: Install modules
+        run: pnpm install
 
-    - name: Run unit tests
-      run: npm test
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Run unit tests
+        run: pnpm test
 
     # - name: Install Playwright browsers
     #   run: npx playwright install --with-deps
