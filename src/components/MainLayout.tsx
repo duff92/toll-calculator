@@ -38,7 +38,7 @@ const MainLayout: React.FC = () => {
             Menu
           </Button>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {process.env.VITE_TITLE}
+            {import.meta.env.VITE_TITLE}
           </Typography>
 
           {/* Add the theme toggle button */}
