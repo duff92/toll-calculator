@@ -13,6 +13,7 @@ describe('App Component', () => {
     const pageTitle = screen.getByRole('heading', {
       name: /Enter registration number/i,
     })
+
     expect(pageTitle).toBeInTheDocument()
   })
 })

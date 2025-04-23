@@ -1,9 +1,9 @@
 import { Box, Typography } from '@mui/material'
 
-import PassagesList from '../components/PassagesList'
-import RegNumberInput from '../components/RegNumberInput'
-import VehicleInformation from '../components/VehicleInformation'
-import { useVehicle } from '../hooks/useVehicle'
+import PassagesList from '@/components/PassagesList'
+import RegNumberInput from '@/components/RegNumberInput'
+import VehicleInformation from '@/components/VehicleInformation'
+import { useVehicle } from '@/hooks/useVehicle'
 
 const TollsPassagesPage = () => {
   const {

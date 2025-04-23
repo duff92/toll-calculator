@@ -1,6 +1,6 @@
 # Toll Calculator
 
-A React application for calculating and managing toll fees, built with TypeScript, Material UI, and Redux.
+A React application for calculating and managing toll fees, built with TypeScript, Material UI, and Redux. This is only a mock application based on the original task defined in [Toll Calculator](https://github.com/IvyTechSE/toll-calculator)
 
 ## Overview
 
@@ -32,19 +32,22 @@ The application implements the following toll fee rules:
 - **State Management**: Redux Toolkit
 - **Routing**: React Router
 - **API Mocking**: Mock Service Worker (MSW)
-- **Testing**: Vitest, React Testing Library
+- **Testing**: Vitest, React Testing Library, Playwright
 - **Build Tool**: Vite
-- **Code Quality**: ESLint, Prettier
+- **Deployment**: Vercel
+- **Code Quality**: ESLint, Prettier, Husky (pre-commit)
+- **DevOps**: Github and Github Actions on each pull request
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ / bun 1+
+- Node.js 20+ / pnpm
 
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/toll-calculator.git
    cd toll-calculator
@@ -52,19 +55,15 @@ The application implements the following toll fee rules:
 
 2. Install dependencies:
    ```bash
-   bun install
-   ```
-
-3. Initialize the MSW service worker:
-   ```bash
-   bun run msw:init
+   pnpm install
    ```
 
 ### Running the Application
 
 Start the development server:
+
 ```bash
-bun run dev
+pnpm run dev
 ```
 
 The application will be available at http://localhost:3000
@@ -72,24 +71,28 @@ The application will be available at http://localhost:3000
 ### Building for Production
 
 ```bash
-bun run build
+pnpm run build
 ```
 
 ## Testing
 
 Run all tests:
+
 ```bash
-bun test
+pnpm test
 ```
 
 Run tests in watch mode:
+
 ```bash
-bun run test:watch
+pnpm run test:watch
 ```
 
+Run E2E tests with Playwright to test accessibility using axe-core:
 Run tests with UI:
+
 ```bash
-bun run test:ui
+pnpm run test:e2e
 ```
 
 ## Project Structure
@@ -113,19 +116,37 @@ bun run test:ui
 - **RegNumberInput**: Input for vehicle registration numbers
 - **Sidebar**: Navigation sidebar
 
-## API
+## API Endpoints
 
-The application uses a mocked API with MSW. The main endpoints:
+The application uses a mocked API with MSW. The main endpoints are:
 
-- `GET /api/vehicles`: List all vehicles
-- `GET /api/vehicles/:registrationNumber`: Get vehicle by registration number
-- `GET /api/passages`: Get passages with filtering options
-- `GET /api/passages/:vehicleId`: Get passages for a specific vehicle
-- `POST /api/calculate-toll`: Calculate toll fee for a vehicle at a specific time
+- **GET /api/vehicles**
+  Returns a list of all vehicles.
+
+- **GET /api/vehicles/:registrationNumber**
+  Retrieves details of a vehicle by its registration number.
+
+- **GET /api/passages/:vehicleId**
+  Returns toll passage history for the specified vehicle.
+
+- **GET /api/passages?date=YYYY-MM-DD&numberOfDays=N&vehicleId=xxx**
+  Returns filtered passages grouped by date along with a daily fee summary.
+  • `date`: Start date for filtering.
+  • `numberOfDays`: Duration (in days) for filtering.
+  • `vehicleId`: (Optional) Filter by a specific vehicle.
+
+- **POST /api/calculate-toll**
+  Calculates the toll fee for a given vehicle type and timestamp.
+  Request body includes `vehicleType` and `timestamp`.
+
+- **POST /api/passages**
+  Records a new toll passage.
+  Request body includes `vehicleType`, `timestamp`, and `location`.
 
 ## Accessibility
 
 The application follows WCAG 2.1 AA guidelines with:
+
 - Proper heading hierarchy
 - ARIA attributes
 - Skip link
@@ -136,13 +157,14 @@ The application follows WCAG 2.1 AA guidelines with:
 
 ### Available Scripts
 
-- `bun run dev`: Start development server
-- `bun run test`: Unit tests
-- `bun run build`: Build for production
-- `bun run preview`: Preview production build
-- `bun run lint`: Run ESLint
-- `bun run lint:fix`: Fix linting issues
-- `bun run prettier`: Format code with Prettier
+- `pnpm run dev`: Start development server
+- `pnpm run test`: Unit tests
+- `pnpm run test:e2e`: E2E tests using playwright
+- `pnpm run build`: Build for production
+- `pnpm run preview`: Preview production build
+- `pnpm run lint`: Run ESLint
+- `pnpm run lint:fix`: Fix linting issues
+- `pnpm run prettier`: Format code with Prettier
 
 ### Contributing
 
@@ -151,6 +173,15 @@ The application follows WCAG 2.1 AA guidelines with:
 3. Commit your changes: `git commit -m 'Add some amazing feature'`
 4. Push to the branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
+
+## Upcoming wishlist
+
+- Add a sign in page using BankID to make users login
+- Fetch your vehicle information based on your social security number and combine that with e.g. https://biluppgifter.se/
+- List all your Vehicles under a vehicle page and then maybe remove the search field since it will be redundant
+- Add a settings page for user information and preferences
+- Additional unit tests for ALL components
+- Additional e2e tests for all pages with a11y checks after interacting with the application
 
 ## License
 

@@ -30,9 +30,7 @@ const StyledSkipLink = styled('a')(({ theme }) => ({
 
 const SkipLink: React.FC = () => {
   return (
-    <StyledSkipLink href="#main-content">
-      Skip to main content
-    </StyledSkipLink>
+    <StyledSkipLink href="#main-content">Skip to main content</StyledSkipLink>
   )
 }
 

@@ -92,11 +92,11 @@ const vehicles = [
 
 // Update the type definition for tollRules
 interface YearFreeDays {
-  [month: number]: number[];
+  [month: number]: number[]
 }
 
 interface FreeDays {
-  [year: number]: YearFreeDays;
+  [year: number]: YearFreeDays
 }
 
 // Toll rules
@@ -166,14 +166,14 @@ const passages = [
 
 // Add new interface definitions
 interface TollFeeBody {
-  vehicleType: VehicleType;
-  timestamp: string;
+  vehicleType: VehicleType
+  timestamp: string
 }
 
 interface PassageBody {
-  vehicleType: VehicleType;
-  timestamp: string;
-  location: string;
+  vehicleType: VehicleType
+  timestamp: string
+  location: string
 }
 
 // Helper functions

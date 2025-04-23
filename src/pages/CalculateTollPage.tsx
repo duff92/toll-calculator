@@ -1,10 +1,9 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography } from '@mui/material'
 
-import TollCalculator from "../components/TollCalculator";
-import { useTollCalculation } from "../hooks/useTollCalculation";
+import TollCalculator from '@/components/TollCalculator'
+import { useTollCalculation } from '@/hooks/useTollCalculation'
 
 const CalculateTollPage = () => {
-
   const {
     vehicleType,
     setVehicleType,
@@ -15,7 +14,7 @@ const CalculateTollPage = () => {
     loading,
     error,
     calculateToll,
-  } = useTollCalculation();
+  } = useTollCalculation()
 
   return (
     <Box sx={{ my: 4 }}>
@@ -35,7 +34,7 @@ const CalculateTollPage = () => {
         error={error}
       />
     </Box>
-  );
-};
+  )
+}
 
-export default CalculateTollPage;
+export default CalculateTollPage
