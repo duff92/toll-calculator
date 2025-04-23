@@ -5,6 +5,7 @@ import CalculateTollPage from '@/pages/CalculateTollPage'
 import TollsPassagesPage from '@/pages/TollsPassagesPage'
 
 // For the Vehicles page I would have added the possibility to store your vehicles (or dynamically fetch the cars registred for you personal number
+
 const VehiclesPage = () => <div>Vehicle Page</div>;
 const SettingsPage = () => <div>Settings Page</div>;
 const NotFoundPage = () => <div>404 - Page Not Found</div>;
