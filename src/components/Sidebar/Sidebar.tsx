@@ -9,10 +9,8 @@ import {
   Typography,
 } from '@mui/material'
 import {
-  DirectionsCar as VehiclesIcon,
   Receipt as PassagesIcon,
   Calculate as CalculateIcon,
-  Settings as SettingsIcon,
 } from '@mui/icons-material'
 import { NavLink } from 'react-router-dom'
 
