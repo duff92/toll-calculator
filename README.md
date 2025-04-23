@@ -175,6 +175,7 @@ The application follows WCAG 2.1 AA guidelines with:
 5. Open a Pull Request
 
 ## Upcoming wishlist
+
 - Add a sign in page using BankID to make users login
 - Fetch your vehicle information based on your social security number and combine that with e.g. https://biluppgifter.se/
 - List all your Vehicles under a vehicle page and then maybe remove the search field since it will be redundant
