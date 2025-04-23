@@ -29,9 +29,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const navItems = [
     { text: 'Toll Passages', icon: <PassagesIcon />, path: '/' },
-    { text: 'Vehicles', icon: <VehiclesIcon />, path: '/vehicles' },
+    // { text: 'Vehicles', icon: <VehiclesIcon />, path: '/vehicles' },
     { text: 'Calculate Toll', icon: <CalculateIcon />, path: '/calculate' },
-    { text: 'Settings', icon: <SettingsIcon />, path: '/settings' },
+    // { text: 'Settings', icon: <SettingsIcon />, path: '/settings' },
   ]
 
   return (
