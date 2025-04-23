@@ -9,10 +9,8 @@ import {
   Typography,
 } from '@mui/material'
 import {
-  DirectionsCar as VehiclesIcon,
   Receipt as PassagesIcon,
   Calculate as CalculateIcon,
-  Settings as SettingsIcon,
 } from '@mui/icons-material'
 import { NavLink } from 'react-router-dom'
 
@@ -29,9 +27,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const navItems = [
     { text: 'Toll Passages', icon: <PassagesIcon />, path: '/' },
-    { text: 'Vehicles', icon: <VehiclesIcon />, path: '/vehicles' },
+    // { text: 'Vehicles', icon: <VehiclesIcon />, path: '/vehicles' },
     { text: 'Calculate Toll', icon: <CalculateIcon />, path: '/calculate' },
-    { text: 'Settings', icon: <SettingsIcon />, path: '/settings' },
+    // { text: 'Settings', icon: <SettingsIcon />, path: '/settings' },
   ]
 
   return (
