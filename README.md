@@ -6,6 +6,7 @@ A React application for calculating and managing toll fees, built with TypeScrip
 
 The Toll Calculator helps users track and calculate toll passages for different vehicles. It implements a comprehensive toll fee system with rules for different vehicle types, time periods, and daily maximums.
 
+
 ### Key Features
 
 - Calculate toll fees based on vehicle type and time of passage
