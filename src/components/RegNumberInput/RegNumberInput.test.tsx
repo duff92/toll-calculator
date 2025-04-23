@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { vi } from 'vitest';
-import RegNumberInput from '../src/components/RegNumberInput';
+import RegNumberInput from './RegNumberInput'
 
 describe('RegNumberInput Component', () => {
   test('renders input and submit button', () => {

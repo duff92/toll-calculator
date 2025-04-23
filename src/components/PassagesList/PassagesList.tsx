@@ -22,8 +22,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { Dayjs } from "dayjs";
 import { useEffect } from "react";
 
-import { usePassages } from "../hooks/usePassages";
-import { DailyTollSummary, TollPassage } from '../mocks/types'
+import { usePassages } from "@/hooks/usePassages";
+import { DailyTollSummary, TollPassage } from '@/mocks/types'
 
 interface PassagesListProps {
   vehicleId?: string;

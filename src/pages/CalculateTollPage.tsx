@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 
-import TollCalculator from "../components/TollCalculator";
-import { useTollCalculation } from "../hooks/useTollCalculation";
+import TollCalculator from '@/components/TollCalculator'
+import { useTollCalculation } from '@/hooks/useTollCalculation'
 
 const CalculateTollPage = () => {
 

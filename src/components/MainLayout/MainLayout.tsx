@@ -10,9 +10,9 @@ import {
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
-import Sidebar from "./Sidebar";
-import SkipLink from './SkipLink'
-import ThemeToggle from './ThemeToggle'
+import Sidebar from '@/components/Sidebar'
+import SkipLink from '@/components/SkipLink'
+import ThemeToggle from '@/components/ThemeToggle'
 
 const MainLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)

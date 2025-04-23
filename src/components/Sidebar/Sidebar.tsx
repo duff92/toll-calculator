@@ -22,7 +22,7 @@ interface SidebarProps {
   width?: number;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({
+export const Sidebar: React.FC<SidebarProps> = ({
   open,
   onClose,
   width = 240
