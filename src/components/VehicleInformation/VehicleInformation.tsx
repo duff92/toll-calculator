@@ -1,18 +1,18 @@
-import BrushIcon from "@mui/icons-material/Brush";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import ToysIcon from "@mui/icons-material/Toys";
-import { Box, Typography, Paper, Grid, Stack, useTheme } from "@mui/material";
+import BrushIcon from '@mui/icons-material/Brush'
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
+import ToysIcon from '@mui/icons-material/Toys'
+import { Box, Typography, Paper, Grid, Stack, useTheme } from '@mui/material'
 
-import { Vehicle } from "@/mocks/types";
+import { Vehicle } from '@/mocks/types'
 
 interface VehicleInformationProps {
-  vehicle: Vehicle | null;
+  vehicle: Vehicle | null
 }
 
 const VehicleInformation = ({ vehicle }: VehicleInformationProps) => {
-  const theme = useTheme();
+  const theme = useTheme()
   if (!vehicle) {
-    return null;
+    return null
   }
 
   return (
@@ -75,6 +75,6 @@ const VehicleInformation = ({ vehicle }: VehicleInformationProps) => {
       </Box>
     </Paper>
   )
-};
+}
 
-export default VehicleInformation;
+export default VehicleInformation

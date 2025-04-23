@@ -5,28 +5,28 @@ import {
   Box,
   Alert,
   CircularProgress,
-} from "@mui/material";
+} from '@mui/material'
 
 interface TollCalculatorProps {
   // Form values
-  vehicleType: string;
-  timestamp: string;
-  onVehicleTypeChange: (vehicleType: string) => void;
-  onTimestampChange: (timestamp: string) => void;
+  vehicleType: string
+  timestamp: string
+  onVehicleTypeChange: (vehicleType: string) => void
+  onTimestampChange: (timestamp: string) => void
 
   // Calculation results
-  fee: number | null;
-  reason: string | null;
+  fee: number | null
+  reason: string | null
 
   // Status
-  loading: boolean;
-  error: string | null;
+  loading: boolean
+  error: string | null
 
   // Available options
-  vehicleTypes?: string[];
+  vehicleTypes?: string[]
 
   // Actions
-  onCalculate: () => void;
+  onCalculate: () => void
 }
 
 const TollCalculator = ({
@@ -38,7 +38,7 @@ const TollCalculator = ({
   reason,
   loading,
   error,
-  vehicleTypes = ["Car", "Motorbike", "Emergency", "Diplomat", "Bus", "Truck"],
+  vehicleTypes = ['Car', 'Motorbike', 'Emergency', 'Diplomat', 'Bus', 'Truck'],
   onCalculate,
 }: TollCalculatorProps) => {
   return (
@@ -102,6 +102,6 @@ const TollCalculator = ({
       )}
     </Box>
   )
-};
+}
 
-export default TollCalculator;
+export default TollCalculator

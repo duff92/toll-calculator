@@ -14,19 +14,19 @@ import {
   Alert,
   CircularProgress,
   Stack,
-  Divider
-} from "@mui/material";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { Dayjs } from "dayjs";
-import { useEffect } from "react";
+  Divider,
+} from '@mui/material'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { Dayjs } from 'dayjs'
+import { useEffect } from 'react'
 
-import { usePassages } from "@/hooks/usePassages";
+import { usePassages } from '@/hooks/usePassages'
 import { DailyTollSummary, TollPassage } from '@/mocks/types'
 
 interface PassagesListProps {
-  vehicleId?: string;
+  vehicleId?: string
 }
 
 const PassagesList: React.FC<PassagesListProps> = ({ vehicleId }) => {
@@ -41,34 +41,34 @@ const PassagesList: React.FC<PassagesListProps> = ({ vehicleId }) => {
     setSelectedVehicleType,
     setSelectedVehicleId,
     formatDate,
-    formatTime
-  } = usePassages();
+    formatTime,
+  } = usePassages()
 
   // Use useEffect to set the vehicle ID when it changes
   useEffect(() => {
     if (vehicleId) {
-      setSelectedVehicleId(vehicleId);
+      setSelectedVehicleId(vehicleId)
     }
-  }, [vehicleId, setSelectedVehicleId]);
+  }, [vehicleId, setSelectedVehicleId])
 
   const vehicleTypes = [
-    "Car",
-    "Motorbike",
-    "Emergency",
-    "Diplomat",
-    "Bus",
-    "Truck",
-    "Military",
-    "Foreign",
-    "Tractor"
-  ];
+    'Car',
+    'Motorbike',
+    'Emergency',
+    'Diplomat',
+    'Bus',
+    'Truck',
+    'Military',
+    'Foreign',
+    'Tractor',
+  ]
 
   if (loading) {
     return (
       <Box display="flex" justifyContent="center" my={4}>
         <CircularProgress />
       </Box>
-    );
+    )
   }
 
   if (error) {
@@ -76,7 +76,7 @@ const PassagesList: React.FC<PassagesListProps> = ({ vehicleId }) => {
       <Alert severity="error" sx={{ my: 2 }}>
         {error}
       </Alert>
-    );
+    )
   }
 
   if (vehicleId && passages.length === 0) {
@@ -84,7 +84,7 @@ const PassagesList: React.FC<PassagesListProps> = ({ vehicleId }) => {
       <Alert severity="info" sx={{ my: 2 }}>
         No passages found for this vehicle.
       </Alert>
-    );
+    )
   }
 
   return (
@@ -200,6 +200,6 @@ const PassagesList: React.FC<PassagesListProps> = ({ vehicleId }) => {
       )}
     </Box>
   )
-};
+}
 
-export default PassagesList;
+export default PassagesList

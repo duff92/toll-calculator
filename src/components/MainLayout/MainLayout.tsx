@@ -1,4 +1,4 @@
-import { Menu as MenuIcon } from "@mui/icons-material";
+import { Menu as MenuIcon } from '@mui/icons-material'
 import {
   AppBar,
   Toolbar,
@@ -6,9 +6,9 @@ import {
   Box,
   Container,
   Button,
-} from "@mui/material";
-import { useState } from "react";
-import { Outlet } from "react-router-dom";
+} from '@mui/material'
+import { useState } from 'react'
+import { Outlet } from 'react-router-dom'
 
 import Sidebar from '@/components/Sidebar'
 import SkipLink from '@/components/SkipLink'
@@ -70,4 +70,4 @@ const MainLayout: React.FC = () => {
   )
 }
 
-export default MainLayout;
+export default MainLayout

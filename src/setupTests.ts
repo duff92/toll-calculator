@@ -1,4 +1,4 @@
-import '@testing-library/jest-dom/vitest';
+import '@testing-library/jest-dom/vitest'
 import { afterEach } from 'vitest'
 
 // Import the existing renderWithProviders utility
@@ -13,5 +13,4 @@ afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 // Export the renderWithProviders utility to make it easily available to tests
-export { renderWithProviders };
-
+export { renderWithProviders }

@@ -1,6 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
-import { calculateToll, fetchTollRules, clearCalculation } from '../store/calculation.reducer';
+import {
+  calculateToll,
+  fetchTollRules,
+  clearCalculation,
+} from '../store/calculation.reducer'
 import { useAppDispatch, useAppSelector } from './redux-hooks'
 
 /**
@@ -8,46 +12,45 @@ import { useAppDispatch, useAppSelector } from './redux-hooks'
  * Provides state and methods for the toll calculator feature
  */
 export function useTollCalculation() {
-  const dispatch = useAppDispatch();
-  const {
-    currentFee,
-    reason,
-    isFree,
-    tollRules,
-    loading,
-    error
-  } = useAppSelector(state => state.calculation);
+  const dispatch = useAppDispatch()
+  const { currentFee, reason, isFree, tollRules, loading, error } =
+    useAppSelector((state) => state.calculation)
 
   // Local form state
-  const [vehicleType, setVehicleType] = useState('');
-  const [timestamp, setTimestamp] = useState('');
+  const [vehicleType, setVehicleType] = useState('')
+  const [timestamp, setTimestamp] = useState('')
 
   // Fetch toll rules when the component mounts
   useEffect(() => {
-    dispatch(fetchTollRules());
+    dispatch(fetchTollRules())
 
     // Clear calculation data when unmounting
     return () => {
-      dispatch(clearCalculation());
-    };
-  }, [dispatch]);
+      dispatch(clearCalculation())
+    }
+  }, [dispatch])
 
   // Calculate toll fee based on vehicle type and timestamp
   const calculateTollFee = () => {
     if (vehicleType && timestamp) {
       // Format timestamp to ISO string if needed
-      const formattedTimestamp = new Date(timestamp).toISOString();
-      dispatch(calculateToll({ vehicleType, timestamp: formattedTimestamp }));
+      const formattedTimestamp = new Date(timestamp).toISOString()
+      dispatch(calculateToll({ vehicleType, timestamp: formattedTimestamp }))
     }
-  };
+  }
 
   // Calculate toll with custom vehicle and time
-  const calculateCustomToll = (customVehicleType: string, customTimestamp: string) => {
-    dispatch(calculateToll({
-      vehicleType: customVehicleType,
-      timestamp: new Date(customTimestamp).toISOString()
-    }));
-  };
+  const calculateCustomToll = (
+    customVehicleType: string,
+    customTimestamp: string,
+  ) => {
+    dispatch(
+      calculateToll({
+        vehicleType: customVehicleType,
+        timestamp: new Date(customTimestamp).toISOString(),
+      }),
+    )
+  }
 
   return {
     // Form state
@@ -71,6 +74,6 @@ export function useTollCalculation() {
     calculateCustomToll,
 
     // Reset method
-    resetCalculation: () => dispatch(clearCalculation())
-  };
+    resetCalculation: () => dispatch(clearCalculation()),
+  }
 }

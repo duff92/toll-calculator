@@ -6,7 +6,6 @@ A React application for calculating and managing toll fees, built with TypeScrip
 
 The Toll Calculator helps users track and calculate toll passages for different vehicles. It implements a comprehensive toll fee system with rules for different vehicle types, time periods, and daily maximums.
 
-
 ### Key Features
 
 - Calculate toll fees based on vehicle type and time of passage
@@ -46,6 +45,7 @@ The application implements the following toll fee rules:
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/toll-calculator.git
    cd toll-calculator
@@ -59,6 +59,7 @@ The application implements the following toll fee rules:
 ### Running the Application
 
 Start the development server:
+
 ```bash
 pnpm run dev
 ```
@@ -74,17 +75,20 @@ pnpm run build
 ## Testing
 
 Run all tests:
+
 ```bash
 pnpm test
 ```
 
 Run tests in watch mode:
+
 ```bash
 pnpm run test:watch
 ```
 
 Run E2E tests with Playwright to test accessibility using axe-core:
 Run tests with UI:
+
 ```bash
 pnpm run test:e2e
 ```
@@ -140,6 +144,7 @@ The application uses a mocked API with MSW. The main endpoints are:
 ## Accessibility
 
 The application follows WCAG 2.1 AA guidelines with:
+
 - Proper heading hierarchy
 - ARIA attributes
 - Skip link

@@ -6,33 +6,33 @@ import {
   ListItemText,
   Divider,
   Box,
-  Typography
-} from "@mui/material";
+  Typography,
+} from '@mui/material'
 import {
   DirectionsCar as VehiclesIcon,
   Receipt as PassagesIcon,
   Calculate as CalculateIcon,
   Settings as SettingsIcon,
 } from '@mui/icons-material'
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom'
 
 interface SidebarProps {
-  open: boolean;
-  onClose: () => void;
-  width?: number;
+  open: boolean
+  onClose: () => void
+  width?: number
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
   open,
   onClose,
-  width = 240
+  width = 240,
 }) => {
   const navItems = [
-    { text: "Toll Passages", icon: <PassagesIcon />, path: "/" },
-    { text: "Vehicles", icon: <VehiclesIcon />, path: "/vehicles" },
-    { text: "Calculate Toll", icon: <CalculateIcon />, path: "/calculate" },
-    { text: "Settings", icon: <SettingsIcon />, path: "/settings" },
-  ];
+    { text: 'Toll Passages', icon: <PassagesIcon />, path: '/' },
+    { text: 'Vehicles', icon: <VehiclesIcon />, path: '/vehicles' },
+    { text: 'Calculate Toll', icon: <CalculateIcon />, path: '/calculate' },
+    { text: 'Settings', icon: <SettingsIcon />, path: '/settings' },
+  ]
 
   return (
     <Drawer
@@ -41,15 +41,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
       variant="temporary"
       ModalProps={{ keepMounted: true }}
       sx={{
-        "& .MuiDrawer-paper": {
+        '& .MuiDrawer-paper': {
           width: width,
-          boxSizing: "border-box",
-          backgroundColor: (theme) => theme.palette.background.default
-        }
+          boxSizing: 'border-box',
+          backgroundColor: (theme) => theme.palette.background.default,
+        },
       }}
     >
       <Box sx={{ p: 2 }}>
-        <Typography variant="h6" component="div" sx={{ fontWeight: "bold" }}>
+        <Typography variant="h6" component="div" sx={{ fontWeight: 'bold' }}>
           Toll Calculator
         </Typography>
       </Box>
@@ -62,27 +62,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
             to={item.path}
             onClick={onClose}
             sx={{
-              color: "text.primary",
-              "&.active": {
-                backgroundColor: "action.selected",
-                "& .MuiListItemIcon-root": {
-                  color: "primary.main",
-                }
+              color: 'text.primary',
+              '&.active': {
+                backgroundColor: 'action.selected',
+                '& .MuiListItemIcon-root': {
+                  color: 'primary.main',
+                },
               },
-              "&:hover": {
-                backgroundColor: "action.hover",
-              }
+              '&:hover': {
+                backgroundColor: 'action.hover',
+              },
             }}
           >
-            <ListItemIcon>
-              {item.icon}
-            </ListItemIcon>
+            <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.text} />
           </ListItem>
         ))}
       </List>
     </Drawer>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

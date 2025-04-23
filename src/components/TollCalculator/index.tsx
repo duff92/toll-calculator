@@ -1,3 +1,3 @@
-import TollCalculator from './TollCalculator';
-export default TollCalculator;
-export * from './TollCalculator';
+import TollCalculator from './TollCalculator'
+export default TollCalculator
+export * from './TollCalculator'

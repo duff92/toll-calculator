@@ -15,7 +15,7 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
 
 export function renderWithProviders(
   ui: React.ReactElement,
-  extendedRenderOptions: ExtendedRenderOptions = {}
+  extendedRenderOptions: ExtendedRenderOptions = {},
 ) {
   const {
     preloadedState = {},
@@ -31,6 +31,6 @@ export function renderWithProviders(
   // Return an object with the store and all of RTL's query functions
   return {
     store,
-    ...render(ui, { wrapper: Wrapper, ...renderOptions })
+    ...render(ui, { wrapper: Wrapper, ...renderOptions }),
   }
 }
