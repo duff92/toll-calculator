@@ -34,7 +34,9 @@ The application implements the following toll fee rules:
 - **API Mocking**: Mock Service Worker (MSW)
 - **Testing**: Vitest, React Testing Library, Playwright
 - **Build Tool**: Vite
+- **Deployment**: Vercel
 - **Code Quality**: ESLint, Prettier, Husky (pre-commit)
+- **DevOps**: Github and Github Actions on each pull request
 
 ## Getting Started
 
@@ -171,6 +173,14 @@ The application follows WCAG 2.1 AA guidelines with:
 3. Commit your changes: `git commit -m 'Add some amazing feature'`
 4. Push to the branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
+
+## Upcoming wishlist
+- Add a sign in page using BankID to make users login
+- Fetch your vehicle information based on your social security number and combine that with e.g. https://biluppgifter.se/
+- List all your Vehicles under a vehicle page and then maybe remove the search field since it will be redundant
+- Add a settings page for user information and preferences
+- Additional unit tests for ALL components
+- Additional e2e tests for all pages with a11y checks after interacting with the application
 
 ## License
 
