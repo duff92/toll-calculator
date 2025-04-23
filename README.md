@@ -32,9 +32,9 @@ The application implements the following toll fee rules:
 - **State Management**: Redux Toolkit
 - **Routing**: React Router
 - **API Mocking**: Mock Service Worker (MSW)
-- **Testing**: Vitest, React Testing Library
+- **Testing**: Vitest, React Testing Library, Playwright
 - **Build Tool**: Vite
-- **Code Quality**: ESLint, Prettier
+- **Code Quality**: ESLint, Prettier, Husky (pre-commit)
 
 ## Getting Started
 
